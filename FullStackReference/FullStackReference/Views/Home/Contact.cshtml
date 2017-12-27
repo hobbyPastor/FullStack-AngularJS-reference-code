@@ -1,6 +1,11 @@
 ﻿@{
     ViewBag.Title = "Contact Us";
 }
+@section scripts
+{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}
 <div class="span12">
     <div class="whity content">
         <!-- Main Content Starts Here -->
@@ -24,25 +29,29 @@
                                         <div class="control-group">
                                             <label class="control-label" for="name">Name</label>
                                             <div class="controls">
-                                                <input type="text" class="input-medium" id="name" name="name">
+                                                <input type="text" class="input-medium" id="name" name="name" data-val="true" data-val-required="*">
+                                                <span class="field-validation-valid" data-valmsg-for="name" data-valmsg-replace="true"></span>
                                             </div>
                                         </div>
                                         <div class="control-group">
                                             <label class="control-label" for="email">Email</label>
                                             <div class="controls">
-                                                <input type="text" class="input-medium" id="email" name="email">
+                                                <input type="text" class="input-medium" id="email" name="email" data-val="true" data-val-required="*" data-val-email="Not a valid email.">
+                                                <span class="field-validation-valid" data-valmsg-for="email" data-valmsg-replace="true"></span>
                                             </div>
                                         </div>
                                         <div class="control-group">
                                             <label class="control-label" for="website">Website</label>
                                             <div class="controls">
-                                                <input type="text" class="input-medium" id="website" name="website">
+                                                <input type="text" class="input-medium" id="website" name="website" data-val="true" data-val-required="*">
+                                                <span class="field-validation-valid" data-valmsg-for="website" data-valmsg-replace="true"></span>
                                             </div>
                                         </div>
                                         <div class="control-group">
                                             <label class="control-label" for="comment">Message</label>
                                             <div class="controls">
-                                                <textarea class="input-medium" id="comment" name="comment" rows="3"></textarea>
+                                                <textarea class="input-medium" id="comment" name="comment" rows="3" data-val="true" data-val-required="*"></textarea>
+                                                <span class="field-validation-valid" data-valmsg-for="comment" data-valmsg-replace="true"></span>
                                             </div>
                                         </div>
                                         <div class="form-actions">
