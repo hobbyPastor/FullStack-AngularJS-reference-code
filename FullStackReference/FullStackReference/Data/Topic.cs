@@ -11,7 +11,7 @@ namespace FullStackReference.Data
         public string Title { get; set; }
         public string Body { get; set; }
         public DateTime Created { get; set; }
-
+        public bool Flagged { get; set; }
         public ICollection<Reply> Replies { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using FullStackReference.Models;
+﻿using FullStackReference.Data;
+using FullStackReference.Models;
 using FullStackReference.Services;
 using System;
 using System.Collections.Generic;
@@ -11,14 +12,23 @@ namespace FullStackReference.Controllers
     public class HomeController : Controller
     {
         private IMailService _mail;
+        private IMessageBoardRepository _repo;
 
-        public HomeController(IMailService mail)
+        public HomeController(IMailService mail, IMessageBoardRepository repo)
         {
             _mail = mail;
+            _repo = repo;
+
         }
         public ActionResult Index()
         {
-            return View();
+            List<Topic> topics = _repo.GetTopics()
+                    .OrderByDescending(t => t.Created)
+                    .Take(25)
+                    .ToList();
+
+
+            return View(topics);
         }
 
         public ActionResult About()
