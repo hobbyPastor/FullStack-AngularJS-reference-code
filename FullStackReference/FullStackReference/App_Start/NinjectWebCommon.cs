@@ -5,6 +5,7 @@ namespace FullStackReference.App_Start
 {
     using System;
     using System.Web;
+    using FullStackReference.Data;
     using FullStackReference.Services;
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 
@@ -67,7 +68,8 @@ namespace FullStackReference.App_Start
 #else
             kernel.Bind<IMailService>().To<MailService>().InRequestScope();
 #endif
-
+            kernel.Bind<MessageBoardContext>().To<MessageBoardContext>().InRequestScope();
+            kernel.Bind<IMessageBoardRepository>().To<MessageBoardRepository>().InRequestScope();
         }
     }
 }
