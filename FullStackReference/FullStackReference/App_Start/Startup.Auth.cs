@@ -58,11 +58,11 @@ namespace FullStackReference
             //   appId: "",
             //   appSecret: "");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "861870929634-lrt2urc0r3l0i8nkev679jsg4ut88v7e.apps.googleusercontent.com",
+                ClientSecret = "Uq9hloNTjPWT55q3RrbYvIIF"
+            });
         }
     }
 }
