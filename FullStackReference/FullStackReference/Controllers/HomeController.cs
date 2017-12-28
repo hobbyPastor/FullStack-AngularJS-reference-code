@@ -1,4 +1,5 @@
 ﻿using FullStackReference.Models;
+using FullStackReference.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,12 @@ namespace FullStackReference.Controllers
 {
     public class HomeController : Controller
     {
+        private IMailService _mail;
+
+        public HomeController(IMailService mail)
+        {
+            _mail = mail;
+        }
         public ActionResult Index()
         {
             return View();
@@ -31,8 +38,23 @@ namespace FullStackReference.Controllers
         [HttpPost]
         public ActionResult Contact(ContactModel model)
         {
-            ViewBag.Message = "Your contact page.";
+            var msg = string.Format("Comment From: {1}{0}Email: {2}{0} Website:{3}{0} Comment: {4}", 
+                Environment.NewLine,
+                model.Name,
+                model.Email,
+                model.Website,
+                model.Comment);
 
+            if (_mail.SendMail("kristian.berrum@gmail.com", "kristian.berrum@live.com", "Website Contact", msg))
+            {
+                ViewBag.MailSent = true;
+            }
+
+            return View();
+        }
+
+        public ActionResult MyMessage()
+        {
             return View();
         }
 

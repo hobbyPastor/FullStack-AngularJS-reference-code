@@ -56,6 +56,10 @@
                                         </div>
                                         <div class="form-actions">
                                             <button type="submit" class="btn">Send</button>
+                                                @if (ViewBag.MailSent != null && ViewBag.MailSent)
+	                                            {
+                                                    <div>Mail Sent!</div>
+                                    	        }
                                         </div>
                                     </fieldset>
                                 </form>
