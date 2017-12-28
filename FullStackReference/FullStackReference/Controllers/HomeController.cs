@@ -53,7 +53,7 @@ namespace FullStackReference.Controllers
             return View();
         }
 
-        public ActionResult MyMessage()
+        public ActionResult MyMessages()
         {
             return View();
         }
