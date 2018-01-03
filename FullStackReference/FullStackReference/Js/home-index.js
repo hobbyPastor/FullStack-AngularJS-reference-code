@@ -1,6 +1,19 @@
 ﻿//home-index.js
+angular.module('app', [])
+    .controller('homeIndexController', function ($scope, $http) {
+        $scope.data = [];
+        $scope.isBusy = true;
 
-function homeIndexController($scope) {
-    $scope.name = "Kris Berr";
-
-}
+        $http.get("/api/v1/topics?includeReplies=true")
+            .then(function (result) {
+                // success
+                angular.copy(result.data, $scope.data);
+            },
+            function () {
+                // error
+                alert("could not load topics");
+            })
+            .then(function () {
+                $scope.isBusy = false;
+            });
+    });

@@ -6,73 +6,42 @@
     <script src="~/Js/home-index.js"></script>
 }
 
-<div data-ng-controller="homeIndexController">
-    <div class="message-header">
-        <h1>Message Board</h1>
-        <p class="lead">Latest Messages...</p>
-        <div>{{ name }}</div>
-    </div>
+    <div data-ng-controller="homeIndexController">
+        <div class="message-header">
+            <h1>Message Board</h1>
+            <p class="lead">Latest Messages...</p>
+            <div>Message Count: {{ data.length }}</div>
+        </div>
 
-    <div class="messages">
-        <div class="message row">
-            <div class="title span10">Consectetur adipiscing elit fusce vel.</div>
-            <div class="date span2">Des 28, 2017</div>
-            <div class="contents span12">Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.</div>
-            <div class="toolbar"><button class="btn btn-primary reply-button">Reply</button></div>
-            <div class="replies span12">
-                <div class="reply">
-                    <div class="created pull-right">
-                        Feb 28, 2013
-                    </div>
-                    <div class="content">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit fusce vel sapien elit in malesuada semper mi, id sollicitudin urna fermentum ut fusce varius nisl ac ipsum gravida vel pretium tellus.
-                    </div>
+        <div class="progress progress-striped active" data-ng-show="isBusy">
+            <div class="bar" style="width: 100%;"></div>
+        </div>
+
+        <div class="messages">
+            <div class="message row" data-ng-repeat="i in data">
+                <div class="title span10">
+                    <a data-ng-href="#/message/{{ i.id }}">{{ i.title }}</a>
                 </div>
-                <div class="reply">
-                    <div class="created pull-right">
-                        Feb 28, 2013
-                    </div>
-                    <div class="content">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit fusce vel sapien elit in malesuada semper mi, id sollicitudin urna fermentum ut fusce varius nisl ac ipsum gravida vel pretium tellus.
-                    </div>
+                <div class="date span2">
+                    {{ i.created | date:"medium" }}
                 </div>
-                <div class="reply">
-                    <div class="created pull-right">
-                        Feb 28, 2013
-                    </div>
-                    <div class="content">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit fusce vel sapien elit in malesuada semper mi, id sollicitudin urna fermentum ut fusce varius nisl ac ipsum gravida vel pretium tellus.
+                <div class="contents span12">
+                    {{ i.body }}
+                </div>
+                <div class="span12 toolbar">
+                    <button class="btn btn-primary">Reply</button>
+                </div>
+                <div class="replies span12">
+                    <div class="reply" data-ng-repeat="r in i.replies">
+                        <div class="created pull-right">
+                            {{ r.created | date:"medium" }}
+                        </div>
+                        <div class="content">
+                            {{ r.body }}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="message row">
-            <div class="title span10">Consectetur adipiscing elit fusce vel.</div>
-            <div class="date span2">Des 28, 2017</div>
-            <div class="contents span12">Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.</div>
-            <div class="toolbar"><button class="btn btn-primary reply-button">Reply</button></div>
-            <div class="replies span12"></div>
-        </div>
-        <div class="message row">
-            <div class="title span10">Consectetur adipiscing elit fusce vel.</div>
-            <div class="date span2">Des 28, 2017</div>
-            <div class="contents span12">Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.</div>
-            <div class="toolbar"><button class="btn btn-primary reply-button">Reply</button></div>
-            <div class="replies span12"></div>
-        </div>
-        <div class="message row">
-            <div class="title span10">Consectetur adipiscing elit fusce vel.</div>
-            <div class="date span2">Des 28, 2017</div>
-            <div class="contents span12">Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.</div>
-            <div class="toolbar"><button class="btn btn-primary reply-button">Reply</button></div>
-            <div class="replies span12"></div>
-        </div>
-        <div class="message row">
-            <div class="title span10">Consectetur adipiscing elit fusce vel.</div>
-            <div class="date span2">Des 28, 2017</div>
-            <div class="contents span12">Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.</div>
-            <div class="toolbar"><button class="btn btn-primary reply-button">Reply</button></div>
-            <div class="replies span12"></div>
         </div>
     </div>
 
