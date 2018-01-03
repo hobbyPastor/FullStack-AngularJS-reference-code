@@ -1,15 +1,15 @@
 ﻿//home-index.js
-angular.module('homeIndex', []);
+var homeIndex = angular.module('homeIndex', ['ngRoute']);
 
 homeIndex.config(function ($routeProvider) {
     $routeProvider.when("/", {
-        controller: "TopicsController",
+        controller: "topicsController",
         templateUrl: "/Template/topicsView.html"
     });
     $routeProvider.otherwise({ redirectTo: "/" });
 });
 
-homeIndex.controller('homeIndexController', function ($scope, $http) {
+homeIndex.controller("topicsController", function ($scope, $http) {
     $scope.data = [];
     $scope.isBusy = true;
 
@@ -26,3 +26,4 @@ homeIndex.controller('homeIndexController', function ($scope, $http) {
             $scope.isBusy = false;
         });
 });
+
