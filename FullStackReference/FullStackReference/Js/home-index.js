@@ -14,14 +14,36 @@ homeIndex.config(function ($routeProvider) {
         templateUrl: "/Template/topicsView.html"
     });
 
-   // $routeProvider.otherwise({ redirectTo: "/" });
+    $routeProvider.otherwise({ redirectTo: "" });
 });
 
-homeIndex.controller("topicsController", function ($scope, $http) {
+homeIndex.service('dataService', ['$http', '$q', function ($http, $q) {
+
+    var _topics = [];
+
+    var _getTopics = function () {
+        var deferred = $q.defer();
+        $http.get("/api/v1/topics?includeReplies=true")
+            .then(function (result) {
+                // success
+                angular.copy(result.data, _topics);
+                deferred.resolve();
+            },
+            function () {
+                // error
+                deferred.reject();
+            })
+        return deffered.promise;
+    }
+
+});
+
+homeIndex.controller("topicsController", ['$scope', '$http', function ($scope, $http) {
+
     $scope.data = [];
     $scope.isBusy = true;
 
-    $http.get("/api/v1/topics?includeReplies=true")
+    dataService._getTopics
         .then(function (result) {
             // success
             angular.copy(result.data, $scope.data);
@@ -33,22 +55,22 @@ homeIndex.controller("topicsController", function ($scope, $http) {
         .then(function () {
             $scope.isBusy = false;
         });
-});
+}]);
 
-homeIndex.controller("newTopicController", function ($scope, $http, $window) {
-    $scope.data = [];
-    $scope.isBusy = true;
+homeIndex.controller("newTopicController", ['$scope', '$http', '$location', function ($scope, $http, $location) {
+    $scope.newTopic = {};
 
-    $http.get("/api/v1/topics?includeReplies=true")
-        .then(function (result) {
-            // success
-            angular.copy(result.data, $scope.data);
-        },
-        function () {
-            // error
-            alert("could not load topics");
-        })
-        .then(function () {
-            $scope.isBusy = false;
-        });
-});
+    $scope.save = function () {
+        $http.post("/api/v1/topics", $scope.newTopic)
+            .then(function (result) {
+                //success
+                var newTopic = result.data;
+                $location.path("/");
+            },
+            function () {
+                //error
+                alert("Cannot save topic!");
+            }
+            );
+    };
+}]);
